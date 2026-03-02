@@ -6,7 +6,7 @@
 #    By: adnen <adnen@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/21 19:55:50 by adnen             #+#    #+#              #
-#    Updated: 2026/03/02 18:00:24 by adnen            ###   ########.fr        #
+#    Updated: 2026/03/02 20:50:40 by adnen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBS		= $(LIBCURL) -lpthread -lssl -lcrypto
 SRC_DIR		= ./
 OBJ_DIR		= obj/
 
-SRCS		= main.cpp Spider.cpp UseCurl.cpp ArgsParser.cpp HtmlParser.cpp UrlParser.cpp ImageDownloader.cpp
+SRCS		= main.cpp Spider.cpp UseCurl.cpp ArgsParser.cpp HtmlParser.cpp UrlParser.cpp ImageDownloader.cpp Crawler.cpp
 OBJS		= $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
 # Colors for pretty output
