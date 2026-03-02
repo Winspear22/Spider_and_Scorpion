@@ -6,15 +6,15 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 20:12:40 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 17:58:31 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 20:43:45 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Spider.hpp"
-#include "UrlParser.hpp"
-#include "UseCurl.hpp"
 #include "HtmlParser.hpp"
 #include "ImageDownloader.hpp"
+#include "UrlParser.hpp"
+#include "UseCurl.hpp"
 
 Spider::Spider(void)
 {
@@ -58,7 +58,7 @@ void Spider::setIsRecursive(bool isRecursive)
 }
 
 int Spider::getDepthNumber(void)
-{
+{ 
 	return this->_depthNumber;
 }
 
@@ -68,13 +68,13 @@ void Spider::setDepthNumber(int nb)
 }
 
 std::string Spider::getPathOfDownload(void)
-{
+{ 
 	return this->_pathOfDownload;
 }
 
 void Spider::setPathOfDownload(std::string path)
 {
-	this->_pathOfDownload = path;
+  this->_pathOfDownload = path;
 }
 
 std::string Spider::getUrl(void)
@@ -94,12 +94,15 @@ void Spider::run(void)
 
 	html = useCurl.getHtml(this->_url);
 	if (html.empty())
-    	std::cerr << "Error: la variable HTML est vide." << std::endl;
+		std::cerr << "Error: la variable HTML est vide." << std::endl;
 	else
 	{
-		std::vector<std::string> imagesUrls = HtmlParser::extractImagesFromHtml(html);
+		std::vector<std::string> imagesUrls =
+		HtmlParser::extractImagesFromHtml(html);
+		std::vector<std::string> linksUrls = HtmlParser::extractLinksFromHtml(html);
 		std::cout << imagesUrls.size() << " images trouvées." << std::endl;
-		
+		std::cout << linksUrls.size() << " liens trouvés." << std::endl;
+
 		UrlParser parser;
 		ImageDownloader downloader;
 		parser.parseUrl(this->_url);

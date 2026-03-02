@@ -6,12 +6,12 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:46:40 by adnen             #+#    #+#             */
-/*   Updated: 2026/02/22 16:59:08 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 20:41:25 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __HTML_PARSER_HPP
-# define __HTML_PARSER_HPP
+#define __HTML_PARSER_HPP
 
 #include "includes.hpp"
 
@@ -23,9 +23,13 @@ class HtmlParser
 		const HtmlParser &operator=(const HtmlParser &src);
 		~HtmlParser(void);
 
-		static std::vector<std::string>		extractImagesFromHtml(const std::string &html);
-		static bool							hasValidExtensionBasic(const std::string &url);
-		static bool							hasValidExtensionParticulars(const std::string &url);
+		static std::vector<std::string>
+		extractImagesFromHtml(const std::string &html);
+		static std::vector<std::string> extractLinksFromHtml(const std::string &html);
+
+		static bool hasValidExtensionBasic(const std::string &url);
+		static bool hasValidExtensionParticulars(const std::string &url);
+		static bool isValidLink(const std::string &url);
 
 	private:
 };

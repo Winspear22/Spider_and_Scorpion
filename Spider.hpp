@@ -6,14 +6,16 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 20:12:43 by adnen             #+#    #+#             */
-/*   Updated: 2026/02/21 22:23:12 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 20:41:53 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __SPIDER_HPP__
 #define __SPIDER_HPP__
 
-# include "includes.hpp"
+#include "includes.hpp"
+
+#include <set>
 
 class Spider
 {
@@ -23,22 +25,25 @@ class Spider
 		const Spider &operator=(const Spider &src);
 		~Spider(void);
 
-		void			run(void);
+		void run(void);
 
-		bool			getIsRecursive(void);
-		void			setIsRecursive(bool isRecursive);
-		int				getDepthNumber(void);
-		void			setDepthNumber(int nb);
-		std::string		getPathOfDownload(void);
-		void			setPathOfDownload(std::string path);
-		std::string		getUrl(void);
-		void			setUrl(std::string url);
+		bool getIsRecursive(void);
+		void setIsRecursive(bool isRecursive);
+		int getDepthNumber(void);
+		void setDepthNumber(int nb);
+		std::string getPathOfDownload(void);
+		void setPathOfDownload(std::string path);
+		std::string getUrl(void);
+		void setUrl(std::string url);
 
 	private:
-		bool			_isRecursive;
-		int				_depthNumber;
-		std::string		_pathOfDownload;
-		std::string		_url;
+		void crawl(const std::string &url, int depth);
+
+		bool _isRecursive;
+		int _depthNumber;
+		std::string _pathOfDownload;
+		std::string _url;
+		std::set<std::string> _visited;
 };
 
 #endif
