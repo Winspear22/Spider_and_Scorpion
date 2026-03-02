@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:49:38 by adnen             #+#    #+#             */
-/*   Updated: 2026/02/26 17:49:45 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 17:50:03 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 
 #include "includes.hpp"
 
-class ImageDownloader
-{
-	public:
-		ImageDownloader(void);
-		ImageDownloader(const ImageDownloader &src);
-		const ImageDownloader &operator=(const ImageDownloader &src);
-		~ImageDownloader(void);
+class ImageDownloader {
+public:
+  ImageDownloader(void);
+  ImageDownloader(const ImageDownloader &src);
+  const ImageDownloader &operator=(const ImageDownloader &src);
+  ~ImageDownloader(void);
 
-		void downloadImage(std::string url);
+  bool downloadImage(const std::string &url, const std::string &outputDir);
 
-	private:
-		std::string _url;
+private:
+  static size_t _writeToFile(void *ptr, size_t size, size_t nmemb,
+                             FILE *stream);
+  static std::string _extractFilename(const std::string &url);
+
+  std::string _url;
 };
 
 #endif

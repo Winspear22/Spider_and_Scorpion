@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 20:12:40 by adnen             #+#    #+#             */
-/*   Updated: 2026/02/26 16:58:53 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 17:58:31 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "UrlParser.hpp"
 #include "UseCurl.hpp"
 #include "HtmlParser.hpp"
+#include "ImageDownloader.hpp"
 
 Spider::Spider(void)
 {
@@ -98,12 +99,17 @@ void Spider::run(void)
 	{
 		std::vector<std::string> imagesUrls = HtmlParser::extractImagesFromHtml(html);
 		std::cout << imagesUrls.size() << " images trouvées." << std::endl;
+		
+		UrlParser parser;
+		ImageDownloader downloader;
+		parser.parseUrl(this->_url);
+
 		size_t i = 0;
-		UrlParser test;
-		test.parseUrl(this->_url);
 		while (i < imagesUrls.size())
 		{
-			std::cout << test.resolveUrl(imagesUrls[i]) << std::endl;
+			std::string fullUrl = parser.resolveUrl(imagesUrls[i]);
+			if (!fullUrl.empty())
+				downloader.downloadImage(fullUrl, this->_pathOfDownload);
 			i++;
 		}
 	}
