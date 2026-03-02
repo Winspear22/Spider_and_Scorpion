@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:03:45 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/03 00:30:48 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/03 00:36:52 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
  * Les fonctions utilitaires communes (lecture binaire, vérification
  * des limites) sont partagées via l'héritage (protected).
  */
-class ExifParser {
+class ExifParser
+{
 public:
   ExifParser();
   virtual ~ExifParser();

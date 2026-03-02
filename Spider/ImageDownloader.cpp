@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:49:31 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 18:28:57 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/03 00:45:27 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ bool ImageDownloader::downloadImage(const std::string &url,
     return FAILURE;
   }
 
-  std::string fullPath = outputDir + filename;
+  std::string dir = outputDir;
+  if (!dir.empty() && dir.back() != '/') {
+    dir += "/";
+  }
+  std::string fullPath = dir + filename;
 
   // Protection 2 : On ne veut pas écraser un fichier déjà existant
   try {
