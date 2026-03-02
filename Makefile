@@ -6,7 +6,7 @@
 #    By: adnen <adnen@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/21 19:55:50 by adnen             #+#    #+#              #
-#    Updated: 2026/03/02 23:57:00 by adnen            ###   ########.fr        #
+#    Updated: 2026/03/03 00:14:32 by adnen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_DIR		= obj/
 
 # Source files
 SPIDER_SRCS	= main.cpp Spider.cpp UseCurl.cpp ArgsParser.cpp HtmlParser.cpp UrlParser.cpp ImageDownloader.cpp Crawler.cpp
-SCORPION_SRCS	= main.cpp ArgsParser.cpp FileValidator.cpp MetaDataReader.cpp
+SCORPION_SRCS	= main.cpp ArgsParser.cpp FileValidator.cpp MetaDataReader.cpp ExifParser.cpp
 
 # Object files
 SPIDER_OBJS	= $(addprefix $(OBJ_DIR)spider/, $(SPIDER_SRCS:.cpp=.o))

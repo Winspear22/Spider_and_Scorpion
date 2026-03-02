@@ -6,11 +6,12 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 21:59:44 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 23:57:20 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/03 00:14:30 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ArgsParser.hpp"
+#include "ExifParser.hpp"
 #include "FileValidator.hpp"
 #include "MetaDataReader.hpp"
 #include "includes.hpp"
@@ -28,8 +29,10 @@ int main(int argc, char **argv) {
 
   int i = 0;
   while (i < (int)files.size()) {
-    if (FileValidator::isFileOfValidFormat(files[i]))
+    if (FileValidator::isFileOfValidFormat(files[i])) {
       MetaDataReader::displayMetadata(files[i]);
+      ExifParser::displayExifData(files[i]);
+    }
     i++;
   }
   return EXIT_SUCCESS;
