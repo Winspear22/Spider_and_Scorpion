@@ -6,7 +6,7 @@
 #    By: adnen <adnen@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/21 19:55:50 by adnen             #+#    #+#              #
-#    Updated: 2026/03/02 20:50:40 by adnen            ###   ########.fr        #
+#    Updated: 2026/03/02 21:55:57 by adnen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBCURL     = $(CURL_DIR)/lib/libcurl.a
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++17 -I$(CURL_DIR)/include
 LIBS		= $(LIBCURL) -lpthread -lssl -lcrypto
 
-SRC_DIR		= ./
+SRC_DIR		= Spider/
 OBJ_DIR		= obj/
 
 SRCS		= main.cpp Spider.cpp UseCurl.cpp ArgsParser.cpp HtmlParser.cpp UrlParser.cpp ImageDownloader.cpp Crawler.cpp
