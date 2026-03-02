@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FileValidator.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 21:59:44 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 23:09:15 by adnen            ###   ########.fr       */
+/*   Created: 2026/03/02 23:10:04 by adnen             #+#    #+#             */
+/*   Updated: 2026/03/02 23:10:08 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.hpp"
-#include "ArgsParser.hpp"
+#ifndef __FILEVALIDATOR_HPP__
+#define __FILEVALIDATOR_HPP__
 
-int main(int argc, char **argv)
+#include "includes.hpp"
+
+class FileValidator
 {
-	if (argc < 2)
-	{
-		std::cerr << "Error: Not enough arguments." << std::endl;
-		return EXIT_FAILURE;
-	}
-    std::vector<std::string> files = ArgsParser::parseFiles(argc, argv);
-    if (files.empty())
-    {
-        std::cerr << "Error: no valid files provided." << std::endl;
-        return EXIT_FAILURE;
-    }
-	return EXIT_SUCCESS;
-}
+public:
+	FileValidator();
+	~FileValidator();
+	const FileValidator &operator=(const FileValidator &other);
+	FileValidator(const FileValidator &other);
+
+private:
+
+};
+
+#endif
