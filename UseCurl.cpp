@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 21:59:44 by adnen             #+#    #+#             */
-/*   Updated: 2026/02/21 23:29:45 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 21:48:00 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ std::string UseCurl::getHtml(const std::string &url)
 		curl_easy_setopt(curl, CURLOPT_USERAGENT, USER_AGENT); // Curl ne se fait pas passer pour curl, mais pour un navigateur (certains sites refusent curl)
 		result = curl_easy_perform(curl); // C'est ici que le téléchargement se fait
 		if (result != CURLE_OK)
-			std::cerr << "Error: " << curl_easy_strerror(result) << std::endl;
+			std::cerr << "Error: Curl failed to fetch URL (" << url << ") - " << curl_easy_strerror(result) << std::endl;
 		curl_easy_cleanup(curl); // Libération de la mémoire
 	}
 	else
