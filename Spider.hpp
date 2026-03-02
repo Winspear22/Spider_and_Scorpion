@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 20:12:43 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 20:41:53 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 21:06:07 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #define __SPIDER_HPP__
 
 #include "includes.hpp"
-
-#include <set>
 
 class Spider
 {
@@ -37,13 +35,10 @@ class Spider
 		void setUrl(std::string url);
 
 	private:
-		void crawl(const std::string &url, int depth);
-
 		bool _isRecursive;
 		int _depthNumber;
 		std::string _pathOfDownload;
 		std::string _url;
-		std::set<std::string> _visited;
 };
 
 #endif

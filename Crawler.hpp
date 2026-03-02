@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 20:49:57 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 20:50:15 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/02 21:11:57 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define __CRAWLER_HPP__
 
 #include "includes.hpp"
+#include <set>
 
 class Crawler
 {
@@ -23,8 +24,12 @@ class Crawler
 		const Crawler &operator=(const Crawler &src);
 		~Crawler(void);
 
-	private:
+		void crawl(const std::string &url, int maxDepth, const std::string &downloadPath, bool isRecursive);
 
+	private:
+		void _crawlRecursive(const std::string &url, int depth, int maxDepth, const std::string &downloadPath, const std::string &baseHost);
+		
+		std::set<std::string> _visited;
 };
 
 #endif
