@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 20:49:54 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/02 21:10:08 by adnen            ###   ########.fr       */
+/*   Updated: 2026/03/22 08:09:56 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void Crawler::crawl(const std::string &url, int maxDepth, const std::string &dow
 	std::string baseHost = baseParser.getHost();
 
 	if (isRecursive)
-		this->_crawlRecursive(url, 0, maxDepth, downloadPath, baseHost);
+		this->_crawlRecursive(url, 0, maxDepth, downloadPath, baseHost); // maxDepth = 5 si non précisée dans les arguments
 	else
-		this->_crawlRecursive(url, 0, 0, downloadPath, baseHost);
+		this->_crawlRecursive(url, 0, 0, downloadPath, baseHost); // on force la profondeur à 0
 }
 
 /*
