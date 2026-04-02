@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:49:31 by adnen             #+#    #+#             */
-/*   Updated: 2026/04/02 18:15:42 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/02 18:21:45 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ImageDownloader::ImageDownloader(void)
 ImageDownloader::ImageDownloader(const ImageDownloader &src)
 {
 	std::cout << "Constructeur de recopie ImageDownloader utilisé." << std::endl;
-  *this = src;
+	*this = src;
 }
 
 const ImageDownloader &ImageDownloader::operator=(const ImageDownloader &src)
@@ -87,8 +87,7 @@ bool ImageDownloader::downloadImage(const std::string &url, const std::string &o
 	}
 	catch (const std::filesystem::filesystem_error &e)
 	{
-    	std::cerr << "Error: Impossible de créer le dossier → " << e.what()
-              << std::endl;
+    	std::cerr << "Error: Impossible de créer le dossier → " << e.what() << std::endl;
     	return FAILURE;
 	}
 	std::ofstream file(fullPath, std::ios::binary);
