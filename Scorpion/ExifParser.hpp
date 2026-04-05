@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:03:45 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/03 00:36:52 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 12:18:51 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,28 @@
  */
 class ExifParser
 {
-public:
-  ExifParser();
-  virtual ~ExifParser();
-  ExifParser(const ExifParser &other);
-  const ExifParser &operator=(const ExifParser &other);
+	public:
+		ExifParser();
+		virtual ~ExifParser();
+		ExifParser(const ExifParser &other);
+		const ExifParser &operator=(const ExifParser &other);
 
-  /* Factory : détecte le format et appelle le bon parser */
-  static void displayExifData(const std::string &filename);
+		/* Factory : détecte le format et appelle le bon parser */
+		static void displayExifData(const std::string &filename);
 
-  /* Méthode virtuelle pure : chaque format l'implémente */
-  virtual void parse(const std::vector<unsigned char> &data) = 0;
+		/* Méthode virtuelle pure : chaque format l'implémente */
+		virtual void parse(const std::vector<unsigned char> &data) = 0;
 
-protected:
-  /* Sécurité : vérifie qu'on ne lit pas hors du fichier */
-  static bool _isOffsetSafe(const std::vector<unsigned char> &data,
-                            size_t offset, size_t bytesNeeded);
+	protected:
+		/* Sécurité : vérifie qu'on ne lit pas hors du fichier */
+		static bool _isOffsetSafe(const std::vector<unsigned char> &data, size_t offset, size_t bytesNeeded);
 
-  /* Charge le fichier en mémoire */
-  static std::vector<unsigned char> _readFile(const std::string &filename);
+		/* Charge le fichier en mémoire */
+		static std::vector<unsigned char> _readFile(const std::string &filename);
 
-  /* Lecture d'entiers avec gestion du byte order */
-  static uint16_t _read16(const std::vector<unsigned char> &data, size_t offset,
-                          bool bigEndian);
-  static uint32_t _read32(const std::vector<unsigned char> &data, size_t offset,
-                          bool bigEndian);
+		/* Lecture d'entiers avec gestion du byte order */
+		static uint16_t _read16(const std::vector<unsigned char> &data, size_t offset, bool bigEndian);
+		static uint32_t _read32(const std::vector<unsigned char> &data, size_t offset, bool bigEndian);
 };
 
 #endif

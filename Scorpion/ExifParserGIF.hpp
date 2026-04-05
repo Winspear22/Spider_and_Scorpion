@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:29:00 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/03 00:31:15 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 12:13:13 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 
 #include "ExifParser.hpp"
 
-class ExifParserGIF : public ExifParser {
-public:
-  ExifParserGIF();
-  ~ExifParserGIF();
-  ExifParserGIF(const ExifParserGIF &other);
-  const ExifParserGIF &operator=(const ExifParserGIF &other);
+class ExifParserGIF : public ExifParser
+{
+	public:
+		ExifParserGIF();
+		~ExifParserGIF();
+		ExifParserGIF(const ExifParserGIF &other);
+		const ExifParserGIF &operator=(const ExifParserGIF &other);
 
-  void parse(const std::vector<unsigned char> &data);
+		void parse(const std::vector<unsigned char> &data);
 };
 
 #endif
