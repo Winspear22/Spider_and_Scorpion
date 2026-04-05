@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:03:42 by adnen             #+#    #+#             */
-/*   Updated: 2026/04/05 16:44:55 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 17:22:01 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ const ExifParser &ExifParser::operator=(const ExifParser &other)
 /*
  * _isOffsetSafe() — Empêche de lire au-delà du fichier.
  * Chaque lecture binaire DOIT passer par cette vérification.
+ * Le mot Offset veut dire "DISTANCE en mémoire"
  */
 bool ExifParser::_isOffsetSafe(const std::vector<unsigned char> &data, size_t offset, size_t bytesNeeded)
 {
-	if (offset + bytesNeeded < offset)
+	if (offset + bytesNeeded < offset) // Sert à contrer le "Wrap around" (dépassement de capacité) --> un hacker donne un fichier qui dépasse un INT (donc le compteur repart à 0)
 		return false;
-	if (offset + bytesNeeded > data.size())
+	if (offset + bytesNeeded > data.size()) // Sert à empêcher de lire au-delà du fichier
 		return false;
 	return true;
 }
@@ -83,23 +84,23 @@ std::vector<unsigned char> ExifParser::_readFile(const std::string &filename)
 /* Lit 2 octets dans le bon ordre */
 uint16_t ExifParser::_read16(const std::vector<unsigned char> &data, size_t offset, bool bigEndian)
 {
-	if (!_isOffsetSafe(data, offset, 2))
+	if (!_isOffsetSafe(data, offset, 2))  // Sécurité : On vérifie qu'on a bien 2 octets disponibles sous le curseur
 		return 0;
-	if (bigEndian)
-		return (data[offset] << 8) | data[offset + 1];
-	return data[offset] | (data[offset + 1] << 8);
+	if (bigEndian) // Si bigEndian est vrai, on lit les octets dans l'ordre big-endian
+		return (static_cast<uint16_t>(data[offset]) << 8) | static_cast<uint16_t>(data[offset + 1]); // On décale le premier octet de 8 bits vers la gauche (on le met à gauche) et on fait un OU logique avec le deuxième octet (le << est un opérateur de décalage)
+	return static_cast<uint16_t>(data[offset]) | (static_cast<uint16_t>(data[offset + 1]) << 8);  // Sinon, on lit dans l'ordre little-endian (on met le deuxième octet à gauche)
 }
 
 /* Lit 4 octets dans le bon ordre */
 uint32_t ExifParser::_read32(const std::vector<unsigned char> &data, size_t offset, bool bigEndian)
 {
-	if (!_isOffsetSafe(data, offset, 4))
+	if (!_isOffsetSafe(data, offset, 4)) // Sécurité : On vérifie qu'on a bien 4 octets disponibles sous le curseur
 		return 0;
 	if (bigEndian)
-		return ((uint32_t)data[offset] << 24) | ((uint32_t)data[offset + 1] << 16) |
-			   ((uint32_t)data[offset + 2] << 8) | (uint32_t)data[offset + 3];
-	return (uint32_t)data[offset] | ((uint32_t)data[offset + 1] << 8) |
-		   ((uint32_t)data[offset + 2] << 16) | ((uint32_t)data[offset + 3] << 24);
+		return (static_cast<uint32_t>(data[offset]) << 24) | (static_cast<uint32_t>(data[offset + 1]) << 16) |
+			   (static_cast<uint32_t>(data[offset + 2]) << 8) | static_cast<uint32_t>(data[offset + 3]);
+	return static_cast<uint32_t>(data[offset]) | (static_cast<uint32_t>(data[offset + 1]) << 8) |
+		   (static_cast<uint32_t>(data[offset + 2]) << 16) | (static_cast<uint32_t>(data[offset + 3]) << 24);
 }
 
 /* ========================================================================== */
