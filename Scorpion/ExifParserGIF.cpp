@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:29:00 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/03 00:32:40 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 12:03:24 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@
 ExifParserGIF::ExifParserGIF() {}
 ExifParserGIF::~ExifParserGIF() {}
 
-ExifParserGIF::ExifParserGIF(const ExifParserGIF &other) : ExifParser(other) {
-  (void)other;
+ExifParserGIF::ExifParserGIF(const ExifParserGIF &other)
+{
+	*this = other;
 }
 
-const ExifParserGIF &ExifParserGIF::operator=(const ExifParserGIF &other) {
-  (void)other;
-  return *this;
+const ExifParserGIF &ExifParserGIF::operator=(const ExifParserGIF &other)
+{
+	if (this != &other)
+		(void)other;
+	std::cout << "ExifParserGIF copy assignment operator called." << std::endl;
+	return *this;
 }
 
 /* ========================================================================== */

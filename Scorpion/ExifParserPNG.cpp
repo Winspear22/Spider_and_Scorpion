@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:29:00 by adnen             #+#    #+#             */
-/*   Updated: 2026/04/05 11:42:02 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 12:00:43 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ ExifParserPNG::~ExifParserPNG()
 	std::cout << "ExifParserPNG destructor called." << std::endl;
 }
 
-ExifParserPNG::ExifParserPNG(const ExifParserPNG &other) : ExifParser(other)
+ExifParserPNG::ExifParserPNG(const ExifParserPNG &other)
 {
 	*this = other;
 	std::cout << "ExifParserPNG copy constructor called." << std::endl;

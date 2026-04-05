@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:29:00 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/03 00:32:42 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 12:03:06 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@
 ExifParserBMP::ExifParserBMP() {}
 ExifParserBMP::~ExifParserBMP() {}
 
-ExifParserBMP::ExifParserBMP(const ExifParserBMP &other) : ExifParser(other) {
-  (void)other;
+ExifParserBMP::ExifParserBMP(const ExifParserBMP &other)
+{
+	std::cout << "ExifParserBMP copy constructor called." << std::endl;
+	*this = other;
 }
 
-const ExifParserBMP &ExifParserBMP::operator=(const ExifParserBMP &other) {
-  (void)other;
-  return *this;
+const ExifParserBMP &ExifParserBMP::operator=(const ExifParserBMP &other)
+{
+	if (this != &other)
+		(void)other;
+	std::cout << "ExifParserBMP copy assignment operator called." << std::endl;
+	return *this;
 }
 
 /* ========================================================================== */
