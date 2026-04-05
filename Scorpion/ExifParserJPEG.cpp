@@ -6,7 +6,7 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:29:00 by adnen             #+#    #+#             */
-/*   Updated: 2026/04/05 15:34:16 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 17:46:05 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,33 @@ int ExifParserJPEG::_findExifOffset(const std::vector<unsigned char> &data)
 
 	while (pos + 4 < data.size())
 	{
-		if (data[pos] != 0xFF)
+		if (data[pos] != 0xFF) // Si on rencontre un octet qui n'est pas 0xFF (début de segment JPEG), on sort
 			return -1;
 
-		uint8_t marker = data[pos + 1];
-
+		uint8_t marker = data[pos + 1]; // On lit le segment JPEG, de quoi le prochain segement va nous parler ? On cherche le segment APP1 (qui contient l'exif)
+										// Ce segment est composé de 2 octets : FF E1
     	/* SOS = fin des métadonnées */
-    	if (marker == 0xDA)
+    	if (marker == 0xDA) // ATTENTION, si on rencontre le segment SOS, on sort car il n'y a plus de métadonnées
 			return -1;
 
-    	if (!_isOffsetSafe(data, pos + 2, 2))
+    	if (!_isOffsetSafe(data, pos + 2, 2)) // On vérifie si on a assez d'octets pour lire la longueur du segment
 			return -1;
-    	uint16_t segLen = (data[pos + 2] << 8) | data[pos + 3];
+    	uint16_t segLen = (data[pos + 2] << 8) | data[pos + 3]; // On lit la longueur du segment toujours avec le '<< 8' pour le décalage des octets
 
     	/* APP1 (0xE1) contient l'EXIF */
-    	if (marker == 0xE1 && _isOffsetSafe(data, pos + 4, 6))
+    	if (marker == 0xE1 && _isOffsetSafe(data, pos + 4, 6)) // On vérifie si le segment est APP1 et si on a assez d'octets pour lire le header TIFF
 		{
-      		if (data[pos + 4] == 'E' && data[pos + 5] == 'x' &&
+      		if (data[pos + 4] == 'E' && data[pos + 5] == 'x' &&  // On vérifie si le header TIFF est correct (Exif\0\0)
           		data[pos + 6] == 'i' && data[pos + 7] == 'f' &&
           		data[pos + 8] == 0x00 && data[pos + 9] == 0x00)
 			{
-        		return (int)(pos + 10);
+        		return static_cast<int>(pos + 10); // C'est l'endroit exact où commence le header TIFF
       		}
     	}
 
-    	pos = pos + 2 + segLen;
+    	pos = pos + 2 + segLen; // On passe au segment suivant
   	}
-  	return -1;
+  	return -1; // Pas de segment APP1 trouvé
 }
 
 /* ========================================================================== */
