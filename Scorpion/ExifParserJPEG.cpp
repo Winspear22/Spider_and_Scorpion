@@ -6,22 +6,32 @@
 /*   By: adnen <adnen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:29:00 by adnen             #+#    #+#             */
-/*   Updated: 2026/03/03 00:32:18 by adnen            ###   ########.fr       */
+/*   Updated: 2026/04/05 11:49:38 by adnen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ExifParserJPEG.hpp"
 
 /* Forme canonique */
-ExifParserJPEG::ExifParserJPEG() {}
-ExifParserJPEG::~ExifParserJPEG() {}
-
-ExifParserJPEG::ExifParserJPEG(const ExifParserJPEG &other)
-    : ExifParser(other) {
-  (void)other;
+ExifParserJPEG::ExifParserJPEG()
+{
+	std::cout << "ExifParserJPEG constructor" << std::endl;
 }
 
-const ExifParserJPEG &ExifParserJPEG::operator=(const ExifParserJPEG &other) {
+ExifParserJPEG::~ExifParserJPEG()
+{
+	std::cout << "ExifParserJPEG destructor" << std::endl;
+}
+
+ExifParserJPEG::ExifParserJPEG(const ExifParserJPEG &other): ExifParser(other)
+{
+	std::cout << "ExifParserJPEG copy constructor" << std::endl;
+	(void)other;
+}
+
+const ExifParserJPEG &ExifParserJPEG::operator=(const ExifParserJPEG &other)
+{
+	std::cout << "ExifParserJPEG assignment operator" << std::endl;
   (void)other;
   return *this;
 }
